@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+'''
+Favor, fazer uma branch separada para implementar o calculo que está restando
+Após isso, nós testamos e vemos a melhor versão, depois daremos merge
+'''
+
 # 
 # Verificar quando a divisão é por zero (não sei onde tem divisão nessa porra)
 # Fazer o calculo das matriz upper e lower e retorna-las a main
@@ -12,7 +17,7 @@ def show(matrix, size):
             print(f'{matrix:.2f}', end='\t')
         print()
     
-# Terminar o calculo aqui
+# Fazer o calculo aqui
 def calculate_lu(matriz, size):
     upper_matriz, lower_matriz = make_matrices(size)
     
