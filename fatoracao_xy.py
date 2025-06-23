@@ -15,14 +15,13 @@ Após isso, nós testamos e vemos a melhor versão, depois daremos merge
 def show(matrix, size):
     for i in range(size):
         for n in range(size):
-            print(f'{matrix:.2f}', end='\t')
+            print(f'{matrix[i][n]:.2f}', end='\t')
         print()
+    print()
     
-# Fazer o calculo aqui
+# Terminar depois
 def calculate_lu(matriz, size):
     upper_matriz, lower_matriz = make_matrices(size)
-    
-    
     
     for k in range(size):
         for j in range(k, size):
@@ -41,9 +40,6 @@ def calculate_lu(matriz, size):
                 raise ZeroDivisionError(f"Divisão por zero no pivô U[{k}][{k}]")
 
             lower_matriz[i][k] = (matriz[i][k] - soma) / pivo
-
-    
-    
     
     return upper_matriz, lower_matriz
     
