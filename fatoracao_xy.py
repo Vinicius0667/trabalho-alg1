@@ -29,7 +29,7 @@ def calculate_lu(matriz, size):
                     lower_matriz[i][x] -= lower_matriz[i][y] * multiplier
                 
                 upper_matriz[y][x] = multiplier
-            else:
+            elif lower_matriz[y][y] == 0:
                 return 0, 0
     
     return upper_matriz, lower_matriz
