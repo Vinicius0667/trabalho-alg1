@@ -1,15 +1,8 @@
 
 # -*- coding: utf-8 -*-
 
-'''
-Favor, fazer uma branch separada para implementar o calculo que está restando
-Após isso, nós testamos e vemos a melhor versão, depois daremos merge
-'''
-
-# 
-# Verificar quando a divisão é por zero (não sei onde tem divisão nessa porra) P: Nem Eu
-# Fazer o calculo das matriz upper e lower e retorna-las a main
-# Fazer o calculo na função calculate_lu
+#
+# Pedro Henrique Urbieta e Vinícius da Silva Mascarenhas
 #
 
 def show(matrix, size):
@@ -18,41 +11,42 @@ def show(matrix, size):
             print(f'{matrix[i][n]:.2f}', end='\t')
         print()
     print()
-    
+
+def showError():
+    print('Divisao por zero.')
+
 # Terminar depois
 def calculate_lu(matriz, size):
-    upper_matriz, lower_matriz = make_matrices(size)
+    lower_matriz = matriz
+    upper_matriz = make_matrices(size)
     
-    for k in range(size):
-        for j in range(k, size):
-            soma = 0
-            for s in range(k):
-                soma += lower_matriz[k][s] * upper_matriz[s][j]
-            upper_matriz[k][j] = matriz[k][j] - soma    
-        for i in range(k+1, size):
-            soma = 0
-            for s in range(k):
-                soma += lower_matriz[i][s] * upper_matriz[s][k]
+    for y in range(size):
+        for x in range(size):
+            if lower_matriz[y][y] != 0 and x > y and x != y:
+                multiplier = lower_matriz[y][x] / lower_matriz[y][y]
                 
-            
-            pivo = upper_matriz[k][k]
-            if pivo == 0:
-                raise ZeroDivisionError(f"Divisão por zero no pivô U[{k}][{k}]")
-
-            lower_matriz[i][k] = (matriz[i][k] - soma) / pivo
+                for i in range(size):
+                    lower_matriz[i][x] -= lower_matriz[i][y] * multiplier
+                
+                upper_matriz[y][x] = multiplier
+            else:
+                return 0, 0
     
     return upper_matriz, lower_matriz
     
 def make_matrices(size: int):
-    return [[0] * size for _ in range(size)], [[1 if i == n else 0 for i in range(size)] for n in range(size)]
+    return [[1 if i == n else 0 for i in range(size)] for n in range(size)]
 
 def main():
     size = int(input())    
     matriz = [list(map(float, input().split())) for _ in range(size)]
     upper_matrix, lower_matrix = calculate_lu(matriz, size)
 
-    show(upper_matrix, size)
-    show(lower_matrix, size)
+    if upper_matrix == 0 and lower_matrix == 0:
+        showError()
+    else: 
+        show(lower_matrix, size)
+        show(upper_matrix, size)
 
     return 0
     
